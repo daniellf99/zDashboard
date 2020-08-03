@@ -1,0 +1,83 @@
+<head>
+
+	<!-- CSS only -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+	<!-- Loads AWS SDK for javascript -->
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.725.0.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+
+		<h3> Insert your data </h3>
+
+		<form>
+		  <div class="form-group">
+		    <label for="salesTotal">$ Sales total</label>
+		    <input type="number" class="form-control" id="salesTotal">
+		  </div>
+
+		  <div class="form-group">
+		    <label for="billedTotal">$ Billed total</label>
+		    <input type="billedTotal" class="form-control" id="billedTotal">
+		  </div>
+
+		  <div class="form-group">
+		    <label for="weightTotal">Kg Billed total</label>
+		    <input type="weightTotal" class="form-control" id="weightTotal">
+		  </div>
+
+		  <button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+
+	<script>
+		var creds = new AWS.CognitoIdentityCredentials({
+  		IdentityPoolId: 'us-east-1:9dc7b8c0-2211-4ab6-b8ec-b7f40086991d',
+		});
+
+		AWS.config.credentials = creds;
+		AWS.config.update({region: "us-east-1"});
+
+		var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+
+		var params = {
+			Item: {
+				"idRelatorio": {
+					S: "0002"
+				},
+				"totalSold": {
+					S: "1000,00"
+				},
+				"totalBilled": {
+					S: "2000,00"
+				},
+				"weightBilled": {
+					S: "20,0"
+				}
+			},
+			ReturnConsumedCapacity: "TOTAL",
+			TableName: "zdashboard"
+			};
+
+		dynamodb.putItem(params, function(err, data) {
+   			if (err) console.log(err, err.stack); // an error occurred
+   			else     console.log(data);           // successful response
+
+   			data = {
+    				ConsumedCapacity: {
+     				CapacityUnits: 1, 
+     				TableName: "zdashboard"
+    				}
+   			}
+ 			});
+
+	</script>
+</body>
+
