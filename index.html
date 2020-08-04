@@ -10,6 +10,19 @@
 
 	<!-- Loads AWS SDK for javascript -->
 	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.725.0.min.js"></script>
+	<script>
+		function processForm() {
+			// retrieves data from forms
+			var totalSold = document.getElementById("salesTotal").value;
+			var totalBilled = document.getElementById("billedTotal").value;
+			var weightBilled = document.getElementById("weightBilled").value;
+
+			// adds data to dynamoDB
+			alert("aaa")
+			console.log(totalSold, totalBilled, weightBilled);
+			//putInDataBase(totalSold, totalBilled, weightBilled);
+		}
+	</script>
 </head>
 
 <body>
@@ -17,7 +30,7 @@
 
 		<h3> Insert your data </h3>
 
-		<form>
+		<form onsubmit="processForm()">
 		  <div class="form-group">
 		    <label for="salesTotal">$ Sales total</label>
 		    <input type="number" class="form-control" id="salesTotal">
@@ -47,37 +60,39 @@
 
 		var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
-		var params = {
-			Item: {
-				"idRelatorio": {
-					S: "0002"
-				},
-				"totalSold": {
-					S: "1000,00"
-				},
-				"totalBilled": {
-					S: "2000,00"
-				},
-				"weightBilled": {
-					S: "20,0"
-				}
+		putInDataBase = (totalSold, totalBilled, weightBilled) => {
+
+			var params = {
+				Item: {
+					"idRelatorio": {
+						S: idRelatorio
+					},
+					"totalSold": {
+						S: totalSold
+					},
+					"totalBilled": {
+						S: totalBilled
+					},
+					"weightBilled": {
+						S: weightBilled
+					}
 			},
 			ReturnConsumedCapacity: "TOTAL",
 			TableName: "zdashboard"
 			};
 
-		dynamodb.putItem(params, function(err, data) {
+			dynamodb.putItem(params, function(err, data) {
    			if (err) console.log(err, err.stack); // an error occurred
    			else     console.log(data);           // successful response
 
    			data = {
     				ConsumedCapacity: {
-     				CapacityUnits: 1, 
+     				CapacityUnits: 1,
      				TableName: "zdashboard"
     				}
    			}
  			});
-
+			}
 	</script>
 </body>
 
