@@ -11,3 +11,8 @@ about the commercial sector of a company.
 ### HTML, CSS & JS libraries used
 1. AWS SDK JS
 2. Bootstrap
+
+#### shotout to the contributors
+doglas
+armando
+danierosan
