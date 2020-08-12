@@ -3,6 +3,7 @@
 zDashboard is a system that uses AWS to store and display data 
 about the commercial sector of a company.
 
+<b>index.html -</b> Interface for internal team.
 ## Tools used
 ### AWS applications used:
 
