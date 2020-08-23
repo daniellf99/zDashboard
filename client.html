@@ -1,0 +1,91 @@
+ <head>
+
+	<!-- CSS only -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+	<!-- JS, Popper.js, and jQuery -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+	<!-- Loads AWS SDK for javascript -->
+	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.725.0.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<p>Those are the last 5 days</p>
+	</div>
+
+	<script>
+
+		function getLast7Days () {
+
+			var result = [];
+			for (var i=0; i<5; i++) {
+				var d = new Date();
+				d.setDate(d.getDate() - i);
+				var timestamp = `${d.getDate()}-${d.getMonth()}-${d.getFullYear()}`;
+				result.push( timestamp )
+			}
+
+			return(result);
+		}
+
+		function generateParams (dateArray) {
+			var arrayLastDays = getLast7Days();
+			var params = getJsonBase();
+			for (i=0; i<4; i++){
+				params['RequestItems']['zdashboard']['Keys'][i]['idRelatorio']['S'] = dateArray[i];
+			}
+			return (params);
+		}
+
+		function getJsonBase() {
+			var params = {
+			RequestItems: {
+				"zdashboard": {
+					Keys: [
+						{
+							"idRelatorio":{"S":""}
+						},
+						{
+							"idRelatorio":{"S":""}
+						},
+						{
+							"idRelatorio":{"S":""}
+						},
+						{
+							"idRelatorio":{"S":""}
+						}
+					]
+			}
+			}};
+			return( params )
+		};
+
+		function getItens() {
+			var dateArray = getLast7Days();
+			var params = generateParams(dateArray);
+			console.log(params);
+
+			var creds = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId: 'us-east-1:716e44bc-2e9a-4ff9-afd9-a6ecdfb2d21a',
+            });
+
+			AWS.config.credentials = creds;
+            AWS.config.update({region: "us-east-1"});
+
+            var dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
+
+			dynamodb.batchGetItem(params, function(err, data) {
+			  if (err) {
+				console.log("Error", err);
+			  } else {
+				  console.log(data);
+			  }
+			});
+		}
+		getItens()
+	</script>
+</body>
