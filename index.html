@@ -51,7 +51,7 @@
 		putInDataBase = (totalSold, totalBilled, weightBilled) => {
 
 			var creds = new AWS.CognitoIdentityCredentials({
-            IdentityPoolId: 'us-east-1:716e44bc-2e9a-4ff9-afd9-a6ecdfb2d21a',
+            	IdentityPoolId: 'us-east-1:716e44bc-2e9a-4ff9-afd9-a6ecdfb2d21a',
             });
 
             AWS.config.credentials = creds;
