@@ -1,3 +1,5 @@
+import AWS from 'aws-sdk';
+
 function processForm() {
     // retrieves data from forms
     var totalSold = document.getElementById("salesTotal").value;
