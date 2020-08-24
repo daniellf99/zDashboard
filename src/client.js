@@ -1,3 +1,5 @@
+import AWS from 'aws-sdk';
+
 function getLast5Days () {
     var result = [];
     for (var i=0; i<5; i++) {
