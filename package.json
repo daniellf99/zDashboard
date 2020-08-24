@@ -1,0 +1,20 @@
+{
+  "name": "zDashboard",
+  "version": "1.0.0",
+  "description": "zDashboard is a system that uses AWS to store and display data about the commercial sector of a company.",
+  "private": "true",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d2hf/zDashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/d2hf/zDashboard/issues"
+  },
+  "homepage": "https://github.com/d2hf/zDashboard#readme"
+}
