@@ -248,7 +248,7 @@ function getItens() {
     var dateArray = getLast5Days();
     var params = generateParams(dateArray);
 
-    var creds = new CognitoIdentityCredentials({
+    var creds = new AWS.CognitoIdentityCredentials({
         IdentityPoolId: 'us-east-1:716e44bc-2e9a-4ff9-afd9-a6ecdfb2d21a',
     });
 
