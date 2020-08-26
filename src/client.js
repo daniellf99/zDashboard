@@ -1,4 +1,5 @@
 import AWS from 'aws-sdk';
+import embed from 'vega-embed';
 
 function getLast5Days () {
     var result = [];
@@ -15,7 +16,7 @@ function getLast5Days () {
 function generateParams (dateArray) {
     var arrayLastDays = getLast5Days();
     var params = getJsonBase();
-    for (i=0; i<4; i++){
+    for (var i=0; i<4; i++) {
         params['RequestItems']['zdashboard']['Keys'][i]['idRelatorio']['S'] = dateArray[i];
     }
     return (params);
@@ -78,11 +79,11 @@ function generateEmptySalesPlot(){
     jsonVega['encoding']['x']['field'] = 'Data';
     jsonVega['encoding']['y']['field'] = 'Valor';
 
-    for (i=0; i<dateLoopLength; i++) {
+    for (var i=0; i<dateLoopLength; i++) {
         var date = dateArray[i];
         jsonVega['data']['values'].push({Data: date, Valor: "0"});
     }
-    vegaEmbed('#salesVis', jsonVega);
+    embed('#salesVis', jsonVega);
 }
 
 function generateEmptyBilledPlot(){
@@ -101,11 +102,11 @@ function generateEmptyBilledPlot(){
     jsonVega['encoding']['x']['field'] = 'Data';
     jsonVega['encoding']['y']['field'] = 'Faturado';
 
-    for (i=0; i<dateLoopLength; i++) {
+    for (var i=0; i<dateLoopLength; i++) {
         var date = dateArray[i];
         jsonVega['data']['values'].push({Data: date, Faturado: "0"});
     }
-    vegaEmbed('#billedVis', jsonVega);
+    embed('#billedVis', jsonVega);
 }
 
 function generateEmptyWeightPlot(){
@@ -124,11 +125,11 @@ function generateEmptyWeightPlot(){
     jsonVega['encoding']['x']['field'] = 'Data';
     jsonVega['encoding']['y']['field'] = 'Peso';
 
-    for (i=0; i<dateLoopLength; i++) {
+    for (var i=0; i<dateLoopLength; i++) {
         var date = dateArray[i];
         jsonVega['data']['values'].push({Data: date, Peso: "0"});
     }
-    vegaEmbed('#weightVis', jsonVega);
+    embed('#weightVis', jsonVega);
 }
 
 function generateSalesPlot(data, dateArray) {
@@ -141,12 +142,12 @@ function generateSalesPlot(data, dateArray) {
     var innerLoopLength = data['Responses']['zdashboard'].length
     var dateLoopLength = dateArray.length;
 
-    for (i=0; i<dateLoopLength; i++){
+    for (var i=0; i<dateLoopLength; i++){
         // configuration for search
         var found = 0;
         var date = dateArray[i];
 
-        for (j=0; j<innerLoopLength; j++){
+        for (var j=0; j<innerLoopLength; j++){
             // if values has already been found skip loop
             if (found == 1) { break;}
 
@@ -165,7 +166,7 @@ function generateSalesPlot(data, dateArray) {
             jsonVega['data']['values'].push({Data:date, Valor: "0"});
     }
 
-    vegaEmbed('#salesVis', jsonVega);
+    embed('#salesVis', jsonVega);
 }
 
 function generateBilledPlot(data, dateArray) {
@@ -178,12 +179,12 @@ function generateBilledPlot(data, dateArray) {
     var innerLoopLength = data['Responses']['zdashboard'].length
     var dateLoopLength = dateArray.length;
 
-    for (i=0; i<dateLoopLength; i++){
+    for (var i=0; i<dateLoopLength; i++){
         // configuration for search
         var found = 0;
         var date = dateArray[i];
 
-        for (j=0; j<innerLoopLength; j++){
+        for (var j=0; j<innerLoopLength; j++){
             // if values has already been found skip loop
             if (found == 1) { break;}
 
@@ -202,7 +203,7 @@ function generateBilledPlot(data, dateArray) {
             jsonVega['data']['values'].push({Data:date, Faturado: "0"});
     }
 
-    vegaEmbed('#billedVis', jsonVega);
+    embed('#billedVis', jsonVega);
 }
 
 function generateWeightPlot(data, dateArray) {
@@ -215,12 +216,12 @@ function generateWeightPlot(data, dateArray) {
     var innerLoopLength = data['Responses']['zdashboard'].length
     var dateLoopLength = dateArray.length;
 
-    for (i=0; i<dateLoopLength; i++){
+    for (var i=0; i<dateLoopLength; i++){
         // configuration for search
         var found = 0;
         var date = dateArray[i];
 
-        for (j=0; j<innerLoopLength; j++){
+        for (var j=0; j<innerLoopLength; j++){
             // if values has already been found skip loop
             if (found == 1) { break;}
 
@@ -239,7 +240,7 @@ function generateWeightPlot(data, dateArray) {
             jsonVega['data']['values'].push({Data:date, Peso: "0"});
     }
 
-    vegaEmbed('#weightVis', jsonVega);
+    embed('#weightVis', jsonVega);
 }
 
 function getItens() {
