@@ -52,3 +52,5 @@ const putInDataBase = (totalSold, totalBilled, weightBilled) => {
         else console.log(data);           // successful response
     });
 }
+
+document.getElementById("btnSubmit").addEventListener("click", processForm);
