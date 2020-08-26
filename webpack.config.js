@@ -2,7 +2,8 @@ module.exports = {
     entry: {
         index: "./src/index.js",
         client: "./src/client.js",
-        login: "./src/login.js"
+        login: "./src/login.js",
+        signup: "./src/signup.js"
     },
     output: {
         filename: "[name].js",
