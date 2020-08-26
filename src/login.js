@@ -1,5 +1,4 @@
 import Auth from '@aws-amplify/auth';
-import {DynamoDB} from "aws-sdk";
 
 Auth.configure({
     region: 'us-east-1',
