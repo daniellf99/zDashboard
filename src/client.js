@@ -9,6 +9,15 @@ Auth.configure({
     identityPoolId: 'us-east-1:716e44bc-2e9a-4ff9-afd9-a6ecdfb2d21a',
 });
 
+async function signOut() {
+    try {
+        await Auth.signOut();
+    } catch (error) {
+    console.error('Error signing out.');
+    console.error(error);
+    }
+}
+
 function getLast5Days () {
     var result = [];
     for (var i=0; i<5; i++) {
@@ -286,6 +295,9 @@ async function getItens() {
         }
     });
 }
+
+document.getElementById('btnSignOut').addEventListener('click', signOut);
+
 generateEmptySalesPlot();
 generateEmptyBilledPlot();
 generateEmptyWeightPlot();
