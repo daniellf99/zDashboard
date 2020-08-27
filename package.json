@@ -1,9 +1,10 @@
 {
-  "name": "zDashboard",
+  "name": "zdashboard",
   "version": "1.0.0",
   "description": "zDashboard is a system that uses AWS to store and display data about the commercial sector of a company.",
   "private": "true",
   "scripts": {
+    "start:dev": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
@@ -12,7 +13,7 @@
     "url": "git+https://github.com/d2hf/zDashboard.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "DDM",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/d2hf/zDashboard/issues"
@@ -20,7 +21,8 @@
   "homepage": "https://github.com/d2hf/zDashboard#readme",
   "devDependencies": {
     "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "@aws-amplify/auth": "^3.3.5",
@@ -28,5 +30,6 @@
     "vega": "^5.14.0",
     "vega-embed": "^6.11.1",
     "vega-lite": "^4.14.1"
-  }
+  },
+  "main": "index"
 }
