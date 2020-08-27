@@ -1,6 +1,8 @@
 import AWS from 'aws-sdk';
 import Auth from '@aws-amplify/auth';
 
+console.log("Hey!");
+
 Auth.configure({
     region: 'us-east-1',
     userPoolId: 'us-east-1_qxqYDrRYz',
