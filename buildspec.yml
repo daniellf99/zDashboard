@@ -7,7 +7,8 @@ phases:
 
 pre_build:
   commands:
-    - whereis npm
+    - TESTE=$(whereis npm)
+    - echo $TESTE
     - npm install
 
 build:
