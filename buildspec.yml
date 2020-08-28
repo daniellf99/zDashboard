@@ -7,7 +7,7 @@ phases:
 
   pre_build:
     commands:
-      - echo FUUUCK
+      - echo hello
       - npm install
 
   build:
