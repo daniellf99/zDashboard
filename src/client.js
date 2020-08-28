@@ -8,7 +8,7 @@ Auth.configure({
     userPoolWebClientId: '2ghd3u701ls9mc66ht68g4p7cn',
     identityPoolId: 'us-east-1:716e44bc-2e9a-4ff9-afd9-a6ecdfb2d21a',
 });
-
+let hey = hey;
 async function signOut() {
     try {
         await Auth.signOut();
