@@ -5,14 +5,14 @@ phases:
     runtime-versions:
       nodejs: 12
 
-pre_build:
-  commands:
-    - echo FUUUCK
-    - npm install
+  pre_build:
+    commands:
+      - echo FUUUCK
+      - npm install
 
-build:
-  commands:
-    - npm run build
+  build:
+    commands:
+      - npm run build
 
 artifacts:
   files:
